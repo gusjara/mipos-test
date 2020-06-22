@@ -61,6 +61,16 @@ class Handler extends ExceptionHandler
             return \Response::json(['error' => 'Sorry, we can\'t find that route. This method is not allowed.'], 405);
         }
 
+        if ($exception instanceof QueryException) {
+            // $errorCode = $exception->errorInfo[1];
+
+            // if ($errorCode == 1451) {
+                return \Response::json('Cannot remove this resource permanently. It is related with any other resource', 409);
+            // }
+        }
+
+        
+
         return parent::render($request, $exception);
     }
 }
